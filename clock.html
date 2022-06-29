@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Diplomata+SC&family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      font-family: 'Diplomata SC', cursive;
+    }
+    html,
+    body{
+      width: 100%;
+      height: 100vh;
+      background: url(./images/bg-clock.jpg) fixed no-repeat center/cover;
+      overflow: hidden;
+    }
+    .container{
+      width: 65%;
+      height: 100%;
+      position: relative;
+      
+    }
+    #clock{
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      background-color:transparent;
+
+      position: absolute;
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%, -48%);
+
+      box-shadow: 
+        15px 10px 12px 18px rgba(0, 0, 0, 0.45);
+      /* 黑色 */
+      /* inset 13px 12px 20px rgba(0, 0, 0, .4), */
+      /* 白色 */
+      /* inset -12px -10px 20px rgba(196, 196, 196, 0.9); */
+      /* border: 1px solid black; */
+    }
+
+/* 針 */
+    #hour{
+      width: 20%;
+      height: 10px;
+      background: white;
+      position: absolute;
+      top: calc(50% - 5px);
+      left: calc(50% - 5px);
+      border-radius: 5px;
+      transform-origin: left center;
+    }
+    #minute{
+      width: 30%;
+      height: 10px;
+      background: rgb(109, 98, 100);
+      position: absolute;
+      top: calc(50% - 5px);
+      left: calc(50% - 5px);
+      border-radius: 5px;
+      transform-origin: left center;
+    }
+    #second{
+      width: 42%;
+      height: 10px;
+      background: rgb(148, 160, 163);
+      position: absolute;
+      top: calc(50% - 5px);
+      left: calc(50% - 5px);
+      border-radius: 5px;
+      transform: rotate(90deg);
+      /* 秒針重新定旋轉"支點"(原本是本身中間) */
+      transform-origin: left center;
+    }
+    .number{
+      width: 525px;
+      height: 525px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+    .number > span{
+      color: white;
+    }
+/* 數字 */
+    .Number12,.Number3,.Number6,.Number9{
+      font-size: 55px;
+      position: absolute;
+      text-align: center;
+      text-shadow: black 10px 14px 14px;
+    }
+    .Number12{
+      left: 0;
+      right: 0;
+      top: 0;
+    }
+    .Number3{
+      top: 50%;
+      right: 0;
+      transform: translate(0, -50%);
+    }
+    .Number6{
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .Number9{
+      left: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+
+/* 1星期 */
+    .todaybox{
+      width: 1300px;
+      height: 80px;
+      border-top: 10px dotted black;
+      border-bottom: 10px dotted black;
+      padding: 2px 0;
+
+      position: absolute;
+      left: 50%;
+      top: 3%;
+      transform: translate(-50%, -3%);
+      
+      text-align: center;
+      font-size: 60px;
+      line-height: 80px;
+    }
+/* 3數位時鐘 */
+    .anotherclock{
+      width: 500px;
+      height: 50px;
+
+      position: absolute;
+      left: 50%;
+      bottom: 3%;
+      transform: translate(-50%, -3%);
+
+      text-align: center;
+      font-size: 40px;
+      line-height: 50px;
+      text-shadow: rgba(0, 0, 0, 0.482) 8px 8px 10px;
+    }
+/* 2日期 */
+    .fulldate{
+      width: 600px;
+      height: 50px;
+      
+      position: absolute;
+      left: 50%;
+      bottom: 9%;
+      transform: translate(-50%, -9%);
+
+      text-align: center;
+      font-size: 55px;
+      line-height: 50px;
+      color: black;
+      
+      text-shadow: 0 0 50px #fff;
+      animation: twinkle 1.5s ease-in-out infinite alternate;
+    }
+    
+    @keyframes twinkle {
+      0%,
+      100% {
+        text-shadow: 0 0 20px #fff, 0 0 80px #fff, 0 0 20px #fff;
+      }
+      50% {
+        text-shadow: 0 0 50px #fff, 0 0 150px #fff, 0 0 50px #fff;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 星期 -->
+    <div class="todaybox"></div>
+    <!-- 時鐘 -->
+    <div id="clock">
+      <div id="hour"></div>
+      <div id="minute"></div>
+      <div id="second"></div>
+      <!-- 時鐘數字 -->
+      <div class="number">
+        <span class="Number12">12</span>
+        <span class="Number3">3</span>
+        <span class="Number6">6</span>
+        <span class="Number9">9</span>
+    </div>
+  </div>
+  <!-- 日期與數位時鐘 -->
+    <div class="fulldate">111</div>
+    <div class="anotherclock"></div>
+  </div>
+<!-----------------------------script----------------------------------->
+  <script>
+    const elHour = document.getElementById('hour')
+    const elMinute = document.getElementById('minute')
+    const elSecond = document.getElementById('second')
+
+    const anotherclock = document.querySelector('.anotherclock')
+    const todaybox = document.querySelector('.todaybox')
+    const fulldate = document.querySelector('.fulldate')
+
+    let clock = () => {
+      const date = new Date()
+      let h = new Date().getHours()
+      let m = new Date().getMinutes()
+      let s = new Date().getSeconds()
+// 指針
+      elHour.style.transform = `rotate(${h*30-90}deg)`
+      elMinute.style.transform = `rotate(${m*6-90}deg)`
+      elSecond.style.transform = `rotate(${s*6-90}deg)`
+    // 數字時鐘 補0
+    if ( h < 10 ){
+      h = "0" + h ;
+    } else { h }
+
+    if ( m < 10 ){
+      m = "0" + m ;
+    } else { m }
+
+    if ( s < 10 ){
+      s = "0" + s ;
+    } else { s }
+    anotherclock.innerText = `${h} : ${m} : ${s} `;
+
+// 星期
+    // 出來是0~6，當索引抓
+    const week = new Date().getDay()
+    const arr = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+    todaybox.innerText = `Today is ${arr[week]}`
+    // 嘗試另一種寫法 switch case
+    // const today = new Date().getDay()
+    // let week = " "
+    // switch (today){
+    //   case 0 :
+    //     week = "星期日"
+    //     break;
+    //   case 1 :
+    //     week = "星期一"
+    //     break;
+    //   case  2 :
+    //     week = "星期二"
+    //     break;
+    //   case 3 :
+    //     week = "星期三"
+    //     break;
+    //   case 4 :
+    //     week = "星期四"
+    //     break;
+    //   case 5 :
+    //     week = "星期五"
+    //     break;
+    //   case 6 :
+    //     week = "星期六"
+    //     break;
+    // }
+    // todaybox.innerText = `今天${week}`
+// 日期
+    let years = new Date().getFullYear()
+    // 月份是0~11，要加1
+    let months = new Date().getMonth()+1
+    let dates = new Date().getDate()
+    if ( months < 10 ){
+      months = "0" + months ;
+    } else { months }
+    if ( dates < 10 ){
+      dates = "0" + dates ;
+    } else { dates }
+    fulldate.innerText = `${years} ${months} ${dates}`
+  }
+    clock();
+    setInterval( clock, 1000);
+  </script>
+  <!-- 補0: '1文字'.padStart(2:捕到幾個字,'0':填什麼) =01 -->
+</body>
+</html>
